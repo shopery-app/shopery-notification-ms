@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: notification-ms
+
+  mail:
+    host: localhost
+    port: 1025
+    username: test
+    password: test
+    protocol: smtp
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: az.shopery.notification_ms.event.NotificationEvent
+
+application:
+  frontend:
+    base-url: http://localhost:3000
+
+app:
+  mail:
+    from: test@test.com
+
+topic:
+  notification: notification-topic
