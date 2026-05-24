@@ -1,5 +1,6 @@
 package az.shopery.notification_ms.service.impl;
 
+import az.shopery.notification_ms.event.NotificationEvent;
 import az.shopery.notification_ms.service.EmailService;
 import jakarta.mail.internet.MimeMessage;
 import java.util.HashMap;
