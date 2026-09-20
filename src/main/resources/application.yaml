@@ -6,10 +6,10 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:local}
 
   mail:
-    host: smtp-relay.brevo.com
+    host: smtp.gmail.com
     port: 587
-    username: ${NO_REPLY_BREVO_USERNAME}
-    password: ${NO_REPLY_BREVO_PASSWORD}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     protocol: smtp
     properties:
       mail:
@@ -33,10 +33,6 @@ spring:
 application:
   frontend:
     base-url: ${FRONTEND_BASE_URL}
-
-app:
-  mail:
-    from: ${NO_REPLY_SHOPERY_USERNAME}
 
 topic:
   notification: notification-topic

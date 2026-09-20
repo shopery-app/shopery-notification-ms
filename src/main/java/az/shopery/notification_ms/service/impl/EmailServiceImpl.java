@@ -19,10 +19,10 @@ import org.thymeleaf.context.Context;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
-    private final JavaMailSender mailSender;
+    private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
-    @Value("${app.mail.from}")
+    @Value("${spring.mail.username}")
     private String from;
 
     @Value("${application.frontend.base-url}")
@@ -43,7 +43,7 @@ public class EmailServiceImpl implements EmailService {
 
             String htmlContent = templateEngine.process(notificationEvent.type().getTemplateName(), context);
 
-            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
             helper.setFrom(from);
@@ -51,7 +51,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setSubject(notificationEvent.type().getSubject());
             helper.setText(htmlContent, true);
 
-            mailSender.send(message);
+            javaMailSender.send(message);
             log.info("Email [{}] successfully sent to {}", notificationEvent.type(), notificationEvent.to());
 
         } catch (Exception e) {
