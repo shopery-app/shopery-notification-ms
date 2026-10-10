@@ -25,18 +25,10 @@ public class EmailServiceImpl implements EmailService {
     @Value("${application.mail.from}")
     private String from;
 
-    @Value("${application.frontend.base-url}")
-    private String frontendBaseUrl;
-
     @Override
     public void sendNotification(NotificationEvent notificationEvent) {
         try {
             Map<String, Object> variables = new HashMap<>(notificationEvent.params());
-            variables.put("frontendBaseUrl", frontendBaseUrl);
-
-            if (variables.containsKey("token")) {
-                variables.put("resetUrl", frontendBaseUrl + "/reset-password?token=" + variables.get("token"));
-            }
 
             Context context = new Context();
             context.setVariables(variables);
